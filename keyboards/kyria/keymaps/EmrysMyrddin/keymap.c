@@ -38,19 +38,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * | Esc  |   A  |   R  |   S  |   T  |   G  |                              |   M  |   N  |   E  |   I  |  O   | ' "  |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * | ; :  |   Z  |   X  |   C  |   D  |   V  | Mute | CtEnt|  | ESC  |Leader|   K  |   H  | ,  < | . >  | /  ? | ` ~  |
+ * | TAB  |   Z  |   X  |   C  |   D  |   V  | Mute | CtEnt|  | ESC  |Leader|   K  |   H  | ,  < | . >  | /  ? | ` ~  |
  * `--------------------+------+------+------+------+------|  |------|------+------+------+------+--------------------'
- *                      | Play | Ctrl | GUI  | Shift| Raise|  | Lower| Shift| GUI | Alt  | GUI  |
- *                      |      |      |  - _ | Enter| Del  |  | BSCP | Space|     |      |      |
+ *                      | Play | Ctrl | GUI  | Shift| Raise|  | Lower| Shift| GUI | Alt  | SLEEP |
+ *                      |      |      |  - _ | Enter| Del  |  | BSCP | Space|     |      |       |
  *                      `----------------------------------'  `----------------------------------'
  */
     [CMK] = LAYOUT(
       KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                                                  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_CIRC,
       KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                                                  KC_M,    KC_N,    KC_E,    KC_I,    KC_O,     KC_QUOT,
-      KC_SCLN, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,   KC_MUTE, C(KC_ENT),    LT(RSE, KC_ESC), KC_OS, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLASH, KC_GRV,
-          KC_MPLY, KC_LCTRL, CMD_T(KC_MINS), SFT_T(KC_ENT), LT(RSE, KC_DEL),   LT(LWR, KC_BSPC), SFT_T(KC_SPC), KC_RGUI, KC_RALT, KC_LGUI
+      KC_TAB, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,   KC_MUTE, C(KC_ENT),    LT(RSE, KC_ESC), KC_OS, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLASH, KC_GRV,
+          KC_MPLY, KC_LCTRL, LGUI_T(KC_MINS), LSFT_T(KC_ENT), LT(RSE, KC_DEL),   LT(LWR, KC_BSPC), RSFT_T(KC_SPC), KC_RGUI, KC_RALT, G(A(KC_EJCT))
     ),
-
 /*
  * Lower Layer: Numpad, Symbol
  *
@@ -75,20 +74,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: Media, nav
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Prns  | Home | cLeft| Up   | cRght| Pgup |                              |  F9  |  F10 |  F11 |  F12 |      |        |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |  Lock  | End  | Left | Down | Right| Pgdn |                              |  F5  |  F6  |  F7  |  F8  |      |        |
+ * |  Prns  | Home | cLeft| Up   | cRght| Pgup |                              | LoScr|  F9  |  F10 |  F11 |  F12 |        |
+ * |--------+------+------+------+------+------|                              |------|------+------+------+------+--------|
+ * |  Lock  | End  | Left | Down | Right| Pgdn |                              |      |  F5  |  F6  |  F7  |  F8  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |  Sleep |      |  <M  |  M>  | <D   | D>   |      |      |  |      |      |  F1  |  F2  |  F3  |  F4  |      |        |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ * |  Sleep |      |  <M  |  M>  | <D   | D>   |      |      |  |      |      |      |  F1  |  F2  |  F3  |  F4  |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+------+---------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [RSE] = LAYOUT(
-      PRINT, KC_HOME,C(KC_LEFT), KC_UP,C(KC_RGHT), KC_PGUP,                                     KC_F9,   KC_F10,  KC_F11,  KC_F12, _______, _______,
-      LOCK,    KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                                     KC_F5,   KC_F6,   KC_F7,   KC_F8,  _______, _______,
-      KC_SLEP, _______, KC_MPRV, KC_MNXT, DSK_PRV, DSK_NXT, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,  _______, _______,
+      PRINT, KC_HOME,C(KC_LEFT), KC_UP,C(KC_RGHT), KC_PGUP,                              KC_SCROLLLOCK, KC_F9,   KC_F10,  KC_F11,  KC_F12, _______,
+      LOCK,    KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                                     _______,KC_F5,   KC_F6,   KC_F7,   KC_F8,  _______,
+      KC_SLEP, _______, KC_MPRV, KC_MNXT, DSK_PRV, DSK_NXT, _______, _______, _______, _______, _______,KC_F1,   KC_F2,   KC_F3,   KC_F4,  _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -137,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     [_LAYERINDEX] = LAYOUT(
 //       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
 //       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-//       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+//       _______, _______, _______, ______t_, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
 //                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 //     ),
 };
@@ -197,6 +196,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if(record->event.pressed) {
                 user_config.osIsLinux = !user_config.osIsLinux;
                 eeconfig_update_user(user_config.raw);
+                tap_code16(CG_SWAP);
             }
             break;
         case KC_BT:

@@ -5,6 +5,7 @@ LEADER_ENABLE = no        # Enable the Leader Key feature
 MOUSEKEY_ENABLE = no
 WPM_ENABLE = yes
 LTO_ENABLE = yes
+BOOTMAGIC_ENABLE = full
 
 SRC += oled.c
 SRC += encoder.c
