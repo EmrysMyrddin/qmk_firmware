@@ -46,14 +46,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TAB,  KC_Q,     KC_W,    KC_F,    KC_P,    KC_B,                                                 KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_CIRC,
 LT(CMK_R, KC_ESC),     KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                                           KC_M,    KC_N,    KC_E,    KC_I,    KC_O, LT(CMK_R, KC_QUOT),
         KC_TAB, KC_Z,     KC_X,    KC_C,    KC_D,    KC_V,KC_MUTE,     MO(LWR_R),    MO(RSE_R),    KC_OS, KC_K,    KC_H, KC_COMM, KC_DOT,  KC_SLASH, KC_GRV,
-             KC_MPLY, KC_LCTRL, LGUI_T(KC_MINS), LSFT_T(KC_ENT), LT(RSE, KC_DEL),   LT(LWR, KC_BSPC), RSFT_T(KC_SPC), KC_RGUI, KC_RALT, G(A(KC_EJCT))
+             KC_MPLY, KC_LCTL, LGUI_T(KC_MINS), LSFT_T(KC_ENT), LT(RSE, KC_DEL),   LT(LWR, KC_BSPC), RSFT_T(KC_SPC), KC_RGUI, KC_RALT, G(A(KC_EJCT))
     ),
 
     [CMK_R] = LAYOUT(
        KC_CIRC,  KC_SCLN,     KC_Y,    KC_U,    KC_L,    KC_J,                                                 KC_B,    KC_P,    KC_F,    KC_W,    KC_Q,  KC_TAB,
        _______,     KC_O,    KC_I,    KC_E,    KC_N,    KC_M,                                   KC_G,    KC_T,    KC_S,    KC_R,    KC_A, _______,
        KC_GRV, KC_SLASH,     KC_DOT,    KC_COMM,    KC_H,    KC_K,      KC_OS,    LT(RSE, KC_ESC),    C(KC_ENT),    KC_MUTE, KC_V,    KC_D, KC_C, KC_X,  KC_Z, KC_TAB,
-             G(A(KC_EJCT)), KC_RALT, KC_RGUI, RSFT_T(KC_SPC), LT(LWR, KC_BSPC),   LT(RSE, KC_DEL),  LSFT_T(KC_ENT), LGUI_T(KC_MINS), KC_LCTRL, KC_MPLY
+             G(A(KC_EJCT)), KC_RALT, KC_RGUI, RSFT_T(KC_SPC), LT(LWR, KC_BSPC),   LT(RSE, KC_DEL),  LSFT_T(KC_ENT), LGUI_T(KC_MINS), KC_LCTL, KC_MPLY
     ),
 /*
  * Lower Layer: Numpad, Symbol
@@ -97,7 +97,7 @@ LT(CMK_R, KC_ESC),     KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                
  *                        `----------------------------------'  `----------------------------------'
  */
     [RSE] = LAYOUT(
-      PRINT, KC_HOME,C(KC_LEFT), KC_UP,C(KC_RGHT), KC_PGUP,                              KC_SCROLLLOCK, KC_F9,   KC_F10,  KC_F11,  KC_F12, _______,
+      PRINT, KC_HOME,C(KC_LEFT), KC_UP,C(KC_RGHT), KC_PGUP,                              KC_SCROLL_LOCK, KC_F9,   KC_F10,  KC_F11,  KC_F12, _______,
       LT(RSE_R, LOCK), KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                                     _______,KC_F5,   KC_F6,   KC_F7,   KC_F8,  MO(RSE_R),
       KC_SLEP, _______, KC_MPRV, KC_MNXT, DSK_PRV, DSK_NXT, _______, _______, _______, _______, _______,KC_F1,   KC_F2,   KC_F3,   KC_F4,  _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
