@@ -6,6 +6,8 @@ MOUSEKEY_ENABLE = no
 WPM_ENABLE = yes
 LTO_ENABLE = yes
 CONSOLE_ENABLE = no
+OS_DETECTION_ENABLE = yes
 
 SRC += oled.c
 SRC += encoder.c
+

@@ -42,3 +42,7 @@
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_ONESHOT
+
+// OS Detection
+#define OS_DETECTION_KEYBOARD_RESET // To reset OS Detection on USB reset, when using a KVM
+#define OS_DETECTION_SINGLE_REPORT  // Avoid late callback calls on some KVM and macOS on ARM

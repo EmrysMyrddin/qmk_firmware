@@ -111,10 +111,10 @@ LT(CMK_R, KC_ESC),     KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                
     ),
 
    [GAME] = LAYOUT(
-     KC_TAB,  KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,                                          KC_T ,  KC_Y  ,  KC_U  ,  KC_I  ,  KC_O  ,  KC_P  ,
-     KC_ESC,  KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,                                          KC_G ,  KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , _______,
-     KC_CAPS, KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V   , _______, _______, _______, _______,   KC_B ,  KC_N  ,  KC_M  ,KC_COMMA, KC_DOT ,KC_SLASH,
-                                _______, MO(GAME_NUM), KC_ENT , KC_SPC , KC_DEL,  _______, _______, _______, MO(GAME_ARROWS), _______
+     KC_TAB,  KC_LALT, KC_Q,    KC_W   , KC_E        , KC_R   ,                                                                    KC_T   , KC_Y    ,  KC_U  ,  KC_I     ,  KC_O  , KC_P   ,
+     KC_ESC,  KC_LCTL, KC_A,    KC_S   , KC_D        , KC_F   ,                                                                    KC_G   , KC_H    ,  KC_J  ,  KC_K     ,  KC_L  , _______ ,
+     KC_CAPS, KC_LSFT, KC_Z,    KC_X   , KC_C        , KC_V   , _______, _______, _______      , _______         , KC_B   ,     KC_N    ,      KC_M  ,      KC_COMMA ,    KC_DOT  , KC_SLASH,
+                                            _______, MO(GAME_NUM), KC_ENT , KC_SPC , KC_DEL , MO(GAME_NUM) , MO(GAME_ARROWS) , _______, _______ , _______
    ),
    [GAME_NUM] = LAYOUT(
       _______,  KC_1  ,  KC_2  ,  KC_3  ,  KC_4  ,  KC_5  ,                                     KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  ,
@@ -269,4 +269,17 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
 
     return state;
+}
+
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    user_config.osIsWindows = detected_os == OS_WINDOWS;
+    eeconfig_update_user(user_config.raw);
+
+    if(user_config.osIsWindows) {
+        layer_on(WIN);
+    } else {
+        layer_off(WIN);
+    }
+
+    return true;
 }
