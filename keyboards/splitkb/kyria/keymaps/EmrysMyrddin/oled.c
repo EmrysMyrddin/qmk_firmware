@@ -1,18 +1,18 @@
 #include QMK_KEYBOARD_H
 #include <string.h>
-#include <stdio.h>
 #include "luna.c"
-//#include "bongocat.c"
 #include "other.h"
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_180;
+}
 
 static void render_default(void) {
     oled_write_P(PSTR("Layout: "), false);
     switch (get_highest_layer(default_layer_state)) {
-       case GAME:
-           oled_write_P(PSTR("Game\n"), false);
-           break;
+        case GAME:
+            oled_write_P(PSTR("Game\n"), false);
+            break;
         case CMK:
             oled_write_P(PSTR("Colemak\n"), false);
             break;
@@ -23,19 +23,19 @@ static void render_default(void) {
 
 static void render_layer_status(void) {
     oled_write_P(PSTR("Layer:  "), false);
-    if(layer_state_is(CMK_R)) {
+    if (layer_state_is(CMK_R)) {
         oled_write_P(PSTR("Reversed\n"), false);
-    } else if(layer_state_is(LWR_R)) {
+    } else if (layer_state_is(LWR_R)) {
         oled_write_P(PSTR("R Sym & Nums\n"), false);
-    } else if(layer_state_is(RSE_R)) {
+    } else if (layer_state_is(RSE_R)) {
         oled_write_P(PSTR("R Nav & Fn \n"), false);
-    } else if(layer_state_is(LWR)) {
+    } else if (layer_state_is(LWR)) {
         oled_write_P(PSTR("Sym & Nums\n"), false);
-    } else if(layer_state_is(RSE)) {
+    } else if (layer_state_is(RSE)) {
         oled_write_P(PSTR("Nav & Fn\n"), false);
-    } else if(layer_state_is(GAME_NUM)) {
+    } else if (layer_state_is(GAME_NUM)) {
         oled_write_P(PSTR("Num row\n"), false);
-    } else if(layer_state_is(GAME_ARROWS)) {
+    } else if (layer_state_is(GAME_ARROWS)) {
         oled_write_P(PSTR("Arrows\n"), false);
     } else {
         oled_write_P(PSTR("Base\n"), false);
@@ -68,25 +68,55 @@ static void render_wpm(void) {
     oled_write_ln(num, false);
 }
 
-char wpm_str[10];
+static void render_rgb_config(void) {
+    hsv_t hsv = rgblight_get_hsv();
+    oled_write_P(PSTR("HSV: "), false);
+    char value[4] = "000";
+    oled_write(itoa(hsv.h, value, 10), false);
+    oled_write_P(PSTR(" "), false);
+    oled_write(itoa(hsv.s, value, 10), false);
+    oled_write_P(PSTR(" "), false);
+    oled_write(itoa(hsv.v, value, 10), false);
+    oled_write_P(PSTR("\n"), false);
+}
+
+#define OFF_TIMEOUT 60000
+#define FADE_OUT_DURATION 5000
+bool  right_cleaned_up = false;
+hsv_t original_underglow_hsv;
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_default();
-        render_layer_status();
-        render_os();
-        render_wpm();
-        animate_luna();
-    } else {
-//        animate_bongocat();
-        oled_set_cursor(0, 7);
-        uint8_t n  = get_current_wpm();
-        wpm_str[3] = '\0';
-        wpm_str[2] = '0' + n % 10;
-        wpm_str[1] = '0' + (n /= 10) % 10;
-        wpm_str[0] = '0' + n / 10;
-        oled_write_P(PSTR("          "), false);
-        oled_write(wpm_str, false);
+        uint32_t last_activity = MIN(last_matrix_activity_elapsed(), last_encoder_activity_elapsed());
+        if (last_activity > OFF_TIMEOUT + FADE_OUT_DURATION) {
+            rgblight_disable_noeeprom();
+            oled_off();
+            return false;
+        } else if (last_activity > OFF_TIMEOUT) {
+            rgblight_sethsv_noeeprom(original_underglow_hsv.h, original_underglow_hsv.s, original_underglow_hsv.v - original_underglow_hsv.v * ((float)last_activity - (float)OFF_TIMEOUT) / (float)FADE_OUT_DURATION);
+        } else {
+            rgblight_reload_from_eeprom();
+            original_underglow_hsv = rgblight_get_hsv();
+            oled_on();
+        }
     }
+
+    if (is_oled_on()) {
+        if (is_keyboard_left()) {
+            render_default();
+            render_layer_status();
+            render_os();
+            render_wpm();
+            // animate_luna();
+        } else {
+            if (!right_cleaned_up) {
+                oled_clear();
+                right_cleaned_up = true;
+            }
+            render_rgb_config();
+            animate_luna();
+        }
+    }
+
     return false;
 }

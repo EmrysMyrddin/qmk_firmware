@@ -21,9 +21,9 @@
 #define RGBLIGHT_HUE_STEP 5
 #define RGBLIGHT_SAT_STEP 5
 #define RGBLIGHT_VAL_STEP 5
-#define RGBLIGHT_SLEEP
-#define RGBLIGHT_LAYERS
-#define RGBLIGHT_DISABLE_KEYCODES
+// #define RGBLIGHT_SLEEP
+// #define RGBLIGHT_LAYERS
+// #define RGBLIGHT_DISABLE_KEYCODES
 
 // EC11K encoders have a different resolution than other EC11 encoders.
 // When using the default resolution of 4, if you notice your encoder skipping
@@ -46,3 +46,11 @@
 // OS Detection
 #define OS_DETECTION_KEYBOARD_RESET // To reset OS Detection on USB reset, when using a KVM
 #define OS_DETECTION_SINGLE_REPORT  // Avoid late callback calls on some KVM and macOS on ARM
+
+// Split synchronisation for OLED display
+// Configuration for Split Keyboards
+#define SPLIT_MODS_ENABLE
+#define SPLIT_WPM_ENABLE
+#define SPLIT_ACTIVITY_ENABLE
+#define SPLIT_LED_STATE_ENABLE
+#define SPLIT_OLED_ENABLE
