@@ -30,7 +30,9 @@
 // every other tick, lower the resolution to 2.
 #define ENCODER_RESOLUTION 2
 
+// Tap-Hold
 #define TAPPING_TERM 150
+#define PERMISSIVE_HOLD
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
@@ -51,6 +53,6 @@
 // Configuration for Split Keyboards
 #define SPLIT_MODS_ENABLE
 #define SPLIT_WPM_ENABLE
-#define SPLIT_ACTIVITY_ENABLE
+// #define SPLIT_ACTIVITY_ENABLE
 #define SPLIT_LED_STATE_ENABLE
 #define SPLIT_OLED_ENABLE
