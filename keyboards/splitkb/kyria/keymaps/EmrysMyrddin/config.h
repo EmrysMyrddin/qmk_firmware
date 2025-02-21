@@ -31,7 +31,7 @@
 #define ENCODER_RESOLUTION 2
 
 // Tap-Hold
-#define TAPPING_TERM 150
+#define TAPPING_TERM 125
 #define PERMISSIVE_HOLD
 
 // Allows to use either side as the master. Look at the documentation for info:
